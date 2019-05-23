@@ -4,7 +4,25 @@ from django.views import View
 
 from .models import Movie, Genre
 
+
 # Create your views here.
+class MovieDetailView(View):
+    template_name = 'single-product.html'
+    key = os.environ['MOVIEDB_APIKEY']
+
+    def get(self, request, *args, **kwargs):
+        movie_id = kwargs.get('movie_id')
+        movie = Movie.objects.filter(movie_id=movie_id).first()
+        movie_genres = movie.genres.all()
+
+        context_dict = {
+            'movie': movie,
+            'api_key': self.key,
+            'movie_genres' : movie_genres
+        }
+        return render(request, self.template_name, context=context_dict)
+
+
 class LandingView(View):
     template_name = 'index.html'
     key = os.environ['MOVIEDB_APIKEY']
