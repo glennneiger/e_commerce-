@@ -344,6 +344,8 @@ $(document).ready(function(){
         quantityAmount.value = value;
     }
 
+
+
   init();
 
 //------- End Quantity Increase & Decrease Value --------//
@@ -558,8 +560,4 @@ $(document).ready(function(){
           ]
         });
       }
-
-
-  
-
  });

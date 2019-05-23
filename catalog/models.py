@@ -17,4 +17,4 @@ class Movie(models.Model):
     description = models.TextField(null=True)
 
     def __str__(self):
-        return self.title
+        return self.movie_id
