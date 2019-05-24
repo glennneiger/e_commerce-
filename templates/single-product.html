@@ -10,9 +10,9 @@
 				<div class="col-first">
 					<h1>Product Details Page</h1>
 					<nav class="d-flex align-items-center">
-						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="/">Home<span class="lnr lnr-arrow-right"></span></a>
 						<a href="#">Shop<span class="lnr lnr-arrow-right"></span></a>
-						<a href="single-product.html">product-details</a>
+						<a href="single-product.html">{{ movie.title }}</a>
 					</nav>
 				</div>
 			</div>
@@ -37,12 +37,12 @@
 						<h2>${{ movie.price }}</h2>
 						<ul class="list">
 
-							<li><span>Category</span>
+							<li><span>Genres</span>
 								{% for genre in movie_genres %}
-								<a class="active" href="#">{{ genre.name }}</a>
+								<a class="active" href="{% url 'genre_detail' genre.name %}">{{ genre.name }}</a>
 								{% endfor %}
 							</li>
-							<li><a href="#"><span>Availibility</span> : In Stock</a></li>
+							<li id="popularity"><a href="#"><span>Popularity</span> </a></li>
 						</ul>
 						<p>{{ movie.description }}</p>
 						<div class="product_count">
@@ -591,12 +591,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			</div>
 		</div>
 	</footer>
+{% endblock content %}
 {% block script %}
 {{ block.super }}
 	<script>
-		console.log('{{ movie.movie_id }}','{{ movie.title }}','{{ api_key}}');
+
 		get_movie_data('{{ movie.movie_id }}','{{ movie.title }}','{{ api_key}}')
 
 	</script>
-{% endblock %}
-{% endblock content %}
+{% endblock script %}
+
