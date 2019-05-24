@@ -2,6 +2,7 @@ import os
 from django.shortcuts import render
 from django.views import View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Count
 
 from .models import Movie, Genre
 
@@ -30,12 +31,16 @@ class GenreDetailView(View):
         page_end = 6 if page_number < 5 else page_number + 2
         return page, page_end, page_start
 
+    def genres_list(self):
+        return Genre.objects.all().distinct()
+
     def get(self, request, *args, **kwargs):
         genre_id = kwargs.get('genre_id')
         if genre_id:
             genre = Genre.objects.filter(name=genre_id).first()
             movies = genre.movies.order_by('-year', 'movie_id')
         else:
+            genre_id = 'All'
             movies = Movie.objects.all().order_by('-year', 'movie_id')
 
         page_number = request.GET.get("page", 1)
@@ -46,6 +51,8 @@ class GenreDetailView(View):
             'movies': page,
             'pages': range(page_start, page_end),
             'api_key': self.key,
+            'genre_id': genre_id,
+            'genres' : self.genres_list()
         }
         return render(request, self.template_name, context=context_dict)
 
