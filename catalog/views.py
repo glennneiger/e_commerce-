@@ -11,10 +11,11 @@ from .models import Movie, Genre
 class GenreDetailView(View):
     template_name = 'category.html'
     key = os.environ['MOVIEDB_APIKEY']
+    default_products = 18
 
     def handle_pagination(self, movies, page_number):
 
-        paginate_by = 18
+        paginate_by = self.default_products
 
         paginator = Paginator(movies, paginate_by)
 

@@ -87,8 +87,8 @@
 							<option value="1">Default sorting</option>
 						</select>
 					</div>
-					<div class="sorting mr-auto">
-						<select>
+					<div class="sorting mr-auto" >
+						<select id="js-movie-filter" >
 							<option value="9">Show 9</option>
 							<option value="18">Show 18</option>
 							<option value="27">Show 27</option>
@@ -157,13 +157,6 @@
 				<!-- End Best Seller -->
 				<!-- Start Filter Bar -->
 				<div class="filter-bar d-flex flex-wrap align-items-center">
-					<div class="sorting mr-auto">
-						<select>
-							<option value="9">Show 9</option>
-							<option value="18">Show 18</option>
-							<option value="27">Show 27</option>
-						</select>
-					</div>
 					{% if movies.has_other_pages %}
 					<div class="pagination">
 						{% if movies.has_previous %}
@@ -416,5 +409,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 		getinfo('{{ movie.movie_id }}','{{ movie.title }}','{{ api_key}}')
 	{% endfor %}
+	console.log($('#js-movie-filter'));
+	$('#js-movie-filter').on('change', function() {
+		var value = $(this).val();
+		console.log(value);
+	});
 	</script>
 {% endblock script%}
