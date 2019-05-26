@@ -1,5 +1,5 @@
 function add_impression(user_id, event_type, content_id, session_id, csrf_token) {
-            console.log('111111');
+            console.log(user_id, event_type, content_id, session_id, csrf_token);
             $.ajax({
                  type: 'POST',
                  url: '/collect/log/',

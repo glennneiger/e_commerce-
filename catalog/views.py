@@ -1,14 +1,15 @@
 import os
+import sys
 from django.shortcuts import render
 from django.views import View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Count
+from .services.user_persistence import UserPersistenceService
 
 from .models import Movie, Genre
 
 
 # Create your views here.
-class GenreDetailView(View):
+class GenreDetailView(View, UserPersistenceService):
     template_name = 'category.html'
     key = os.environ['MOVIEDB_APIKEY']
     default_products = 18
@@ -51,6 +52,8 @@ class GenreDetailView(View):
         context_dict = {
             'movies': page,
             'pages': range(page_start, page_end),
+            'session_id': self.session_id(request),
+            'user_id': self.user_id(request),
             'api_key': self.key,
             'genre_id': genre_id,
             'genres' : self.genres_list()
@@ -58,7 +61,7 @@ class GenreDetailView(View):
         return render(request, self.template_name, context=context_dict)
 
 
-class MovieDetailView(View):
+class MovieDetailView(View, UserPersistenceService):
     template_name = 'single-product.html'
     key = os.environ['MOVIEDB_APIKEY']
 
@@ -69,13 +72,15 @@ class MovieDetailView(View):
 
         context_dict = {
             'movie': movie,
+            'session_id': self.session_id(request),
+            'user_id': self.user_id(request),
             'api_key': self.key,
             'movie_genres' : movie_genres
         }
         return render(request, self.template_name, context=context_dict)
 
 
-class LandingView(View):
+class LandingView(View, UserPersistenceService):
     template_name = 'index.html'
     key = os.environ['MOVIEDB_APIKEY']
 
@@ -86,6 +91,8 @@ class LandingView(View):
 
         context_dict = {'movies': movies,
                         'latest_movies': latest_movies,
+                        'session_id': self.session_id(request),
+                        'user_id': self.user_id(request),
                         'genres': genres,
                         'api_key': self.key}
 

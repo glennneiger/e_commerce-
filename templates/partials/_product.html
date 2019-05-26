@@ -19,7 +19,7 @@
                     <span class="lnr lnr-sync"></span>
                     <p class="hover-text">compare</p>
                 </a>
-                <a href="{% url 'movie_detail' movie.movie_id %}" class="social-info" onclick="add_impression(1, 1, 1, 1, 1)">
+                <a href="{% url 'movie_detail' movie.movie_id %}" class="social-info" onclick="add_impression('{{user_id}}', 'more_details', '{{movie.movie_id}}', '{{ session_id }}',1)">
                     <span class="lnr lnr-move"></span>
                     <p class="hover-text">view more</p>
                 </a>
