@@ -603,13 +603,29 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 {% endblock content %}
 {% block script %}
 {{ block.super }}
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 	<script>
 
 		get_movie_data('{{ movie.movie_id }}','{{ movie.title }}','{{ api_key}}')
 
         $('#js-add-to-cart-btn').on('click', function(e) {
             e.preventDefault();
-            console.log($('#product-id').text(), $("#sst").val());
+            var product_id = $('#product-id').text();
+            var quantity =  $("#sst").val();
+
+			Swal.fire({
+				type: 'success',
+  				title: 'Movie successfully added!',
+			})
+
+			if (localStorage.getItem(product_id)) {
+				var item_quantity = localStorage.getItem(product_id);
+				localStorage.setItem(product_id, parseInt(quantity)+parseInt(item_quantity));
+				console.log(localStorage.getItem(product_id));
+			} else {
+
+				localStorage.setItem(product_id, parseInt(quantity));
+			}
         });
 	</script>
 {% endblock script %}
