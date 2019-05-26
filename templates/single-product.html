@@ -43,6 +43,7 @@
 								{% endfor %}
 							</li>
 							<li id="popularity"><a href="#"><span>Popularity</span> </a></li>
+                            <li id="year_release"><a href="#"><span>Year</span>{{ movie.year }}</a></li>
 						</ul>
 						<p>{{ movie.description }}</p>
 						<div class="product_count">
@@ -54,7 +55,7 @@
 							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
 						</div>
 						<div class="card_area d-flex align-items-center">
-							<a class="primary-btn" href="#">Add to Cart</a>
+							<a class="primary-btn" href="#" id="js-add-to-cart-btn">Add to Cart</a>
 							<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
 							<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
 						</div>
@@ -93,6 +94,14 @@
 					<div class="table-responsive">
 						<table class="table">
 							<tbody>
+                                <tr>
+									<td>
+										<h5>ProductID</h5>
+									</td>
+									<td>
+										<h5 id="product-id">{{ movie.movie_id }}</h5>
+									</td>
+								</tr>
 								<tr>
 									<td>
 										<h5>Width</h5>
@@ -598,6 +607,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 		get_movie_data('{{ movie.movie_id }}','{{ movie.title }}','{{ api_key}}')
 
+        $('#js-add-to-cart-btn').on('click', function(e) {
+            e.preventDefault();
+            console.log($('#product-id').text(), $("#sst").val());
+        });
 	</script>
 {% endblock script %}
 
