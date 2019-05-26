@@ -10,7 +10,7 @@ from .models import Movie, Genre
 
 # Create your views here.
 class GenreDetailView(View, UserPersistenceService):
-    template_name = 'category.html'
+    template_name = 'catalog/category.html'
     key = os.environ['MOVIEDB_APIKEY']
     default_products = 18
 
@@ -62,7 +62,7 @@ class GenreDetailView(View, UserPersistenceService):
 
 
 class MovieDetailView(View, UserPersistenceService):
-    template_name = 'single-product.html'
+    template_name = 'catalog/single-product.html'
     key = os.environ['MOVIEDB_APIKEY']
 
     def get(self, request, *args, **kwargs):
