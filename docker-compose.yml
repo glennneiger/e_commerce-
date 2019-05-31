@@ -16,7 +16,7 @@ services:
     volumes:
       - ./:/app
     ports:
-      - "8000:8000"
+      - 8000:8000
     depends_on:
       - db
 
@@ -27,4 +27,11 @@ services:
     ports:
       - 1337:80
     depends_on:
+      - web
+
+  rec_eng:
+    image: kushneryk/recommend-eng:latest
+    ports: 
+      - 8080:8080
+    depends_on: 
       - web

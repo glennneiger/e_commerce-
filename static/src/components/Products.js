@@ -8,7 +8,6 @@ class Products extends Component {
             products: Object.keys(localStorage),
             total_sum: 0.0
         }
-
         this.updateSubtotal = this.updateSubtotal.bind(this)
     }
 
@@ -59,7 +58,7 @@ class Products extends Component {
                         <h5>Subtotal</h5>
                     </td>
                     <td>
-                        <h5>${this.state.total_sum}</h5>
+                        <h5>${this.state.total_sum.toFixed(2)}</h5>
                     </td>
                 </tr>
             </>
