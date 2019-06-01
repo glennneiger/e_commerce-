@@ -1,5 +1,6 @@
 {% extends "../base.html" %}
 {% load staticfiles %}
+{% block title %}{{ movie.title }}{% endblock %}
 {% block content %}
 <!-- End Header Area -->
 
@@ -40,7 +41,8 @@
 
 						<li><span>Genres</span>
 							{% for genre in movie_genres %}
-							<a class="active" href="{% url 'genre_detail' genre.name %}">{{ genre.name }}</a>
+							<a class="active" href="{% url 'genre_detail' genre.name %}"
+								onclick="add_impression('{{user_id}}', 'genre:{{genre.name}}', '{{movie.movie_id}}', '{{ session_id }}')">{{ genre.name }}</a>
 							{% endfor %}
 						</li>
 						<li id="popularity"><a href="#"><span>Popularity</span> </a></li>
@@ -59,7 +61,9 @@
 							class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
 					</div>
 					<div class="card_area d-flex align-items-center">
-						<a class="primary-btn" href="#" id="js-add-to-cart-btn">Add to Cart</a>
+						<a class="primary-btn" href="#" id="js-add-to-cart-btn"
+							onclick="add_impression('{{user_id}}', 'add_to_cart', '{{movie.movie_id}}', '{{ session_id }}')">Add
+							to Cart</a>
 						<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
 						<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
 					</div>
@@ -76,7 +80,8 @@
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
 			<li class="nav-item">
 				<a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-					aria-selected="true">Description</a>
+					aria-selected="true"
+					onclick="add_impression('{{user_id}}', 'details', '{{movie.movie_id}}', '{{ session_id }}')">Description</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"

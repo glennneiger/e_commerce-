@@ -39,9 +39,12 @@ class Product extends Component {
     };
 
     componentDidMount() {
+        console.log('componentDidMount')
         API.get(`products/${this.props.productId}`)
             .then(res => {
+
                 const product_data = res.data.data
+
                 this.setState({ product_data: product_data, product_price: parseFloat(product_data.attributes.price) })
                 this.props.totalProductPrice(this.state.product_price * this.state.product_amount);
             })
